@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { PersonsDataTable, BilletsDataTable } from "../../components";
+import {
+  PersonsDataTable,
+  BilletsDataTable,
+  TableHeader,
+} from "../../components";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -27,6 +31,7 @@ const PositionManagement = () => {
           <Tab value="two" label="Billets" onClick={() => setTab("billets")} />
         </Tabs>
       </Box>
+      <TableHeader />
       {tab === "persons" && <PersonsDataTable />}
       {tab === "billets" && <BilletsDataTable />}
     </div>

@@ -96,30 +96,30 @@ export default function SidebarDrawer() {
         <DrawerHeader></DrawerHeader>
         <List>
           <ListItem disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+            <Link className="link" to="/positionManagement">
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                  color: "white",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                <Link className="link" to="/positionManagement">
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                    color: "white",
+                  }}
+                >
                   <PersonIcon />
-                </Link>
-              </ListItemIcon>
-              <ListItemText
-                primary="Position Management"
-                sx={{ opacity: open ? 1 : 0, color: "white" }}
-              />
-            </ListItemButton>
+                </ListItemIcon>
+                <ListItemText
+                  primary="Position Management"
+                  sx={{ opacity: open ? 1 : 0, color: "white" }}
+                />
+              </ListItemButton>
+            </Link>
           </ListItem>
         </List>
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
+import Button from "@mui/material/Button";
 
 const columns = [
   { field: "billetNumber", headerName: "Billet Number", width: 190 },
@@ -28,7 +29,7 @@ export default function BilletsDataTable() {
       setBillets(res.data);
     };
     fetchPersons();
-  }, []);
+  }, [billets]);
 
   return (
     <div style={{ height: 400, width: "100%" }}>
@@ -39,6 +40,9 @@ export default function BilletsDataTable() {
         rowsPerPageOptions={[5]}
         checkboxSelection
       />
+      <Button variant="outlined" sx={{ marginTop: "10px" }}>
+        Add Billet
+      </Button>
     </div>
   );
 }

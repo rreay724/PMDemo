@@ -6,7 +6,6 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <SidebarDrawer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/positionManagement" element={<PositionManagement />} />
