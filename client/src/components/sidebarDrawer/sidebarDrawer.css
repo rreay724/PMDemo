@@ -1,0 +1,14 @@
+.MuiPaper-root{
+    background-color: #1976d2 !important;
+    z-index: 0 !important;
+}
+
+
+
+.openArrow{
+    position:absolute;
+    bottom:10px;
+   margin-left: 10px;
+   color:white;
+}
+
