@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { PersonForm } from "../../components";
 
@@ -35,8 +34,6 @@ export default function PersonsDataTable() {
     };
     fetchPersons();
   }, []);
-
-  console.log(persons);
 
   return (
     <div style={{ height: 400, width: "100%" }}>

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import { BilletForm } from "../";
 
 const columns = [
   { field: "billetNumber", headerName: "Billet Number", width: 190 },
@@ -15,21 +18,22 @@ const columns = [
     field: "clearanceRequirement",
     headerName: "Clearance Requirement",
     sortable: false,
-    width: 180,
+    width: 200,
   },
-  { field: "exemptStatus", headerName: "Exempt Status", width: 290 },
+  { field: "exemptStatus", headerName: "Exempt Status", width: 200 },
   { field: "travelRequirement", headerName: "Travel Requirement", width: 290 },
 ];
 
 export default function BilletsDataTable() {
   const [billets, setBillets] = useState([]);
+  const [open, setOpen] = useState(false);
   useEffect(() => {
-    const fetchPersons = async () => {
+    const fetchBillets = async () => {
       const res = await axios.get("/billet");
       setBillets(res.data);
     };
-    fetchPersons();
-  }, [billets]);
+    fetchBillets();
+  }, []);
 
   return (
     <div style={{ height: 400, width: "100%" }}>
@@ -40,9 +44,23 @@ export default function BilletsDataTable() {
         rowsPerPageOptions={[5]}
         checkboxSelection
       />
-      <Button variant="outlined" sx={{ marginTop: "10px" }}>
+      <Button
+        variant="outlined"
+        sx={{ marginTop: "10px" }}
+        onClick={() => setOpen(true)}
+      >
         Add Billet
       </Button>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+          <BilletForm />
+        </Box>
+      </Modal>
     </div>
   );
 }
