@@ -85,62 +85,74 @@ export default function SidebarDrawer() {
   };
 
   return (
-    <MainBox
-      sx={{
-        display: "flex",
-      }}
-    >
-      <CssBaseline />
+    <div className="drawer">
+      <MainBox
+        sx={{
+          display: "flex",
+        }}
+      >
+        <CssBaseline />
 
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader></DrawerHeader>
-        <List>
-          <ListItem disablePadding sx={{ display: "block" }}>
-            <Link className="link" to="/positionManagement">
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
+        <Drawer
+          variant="permanent"
+          open={open}
+          PaperProps={{
+            sx: {
+              backgroundColor: "#1976d2",
+              color: "red",
+              zIndex: "0",
+            },
+          }}
+        >
+          <DrawerHeader></DrawerHeader>
+          <List>
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <Link className="link" to="/positionManagement">
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                    color: "white",
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
                   }}
                 >
-                  <PersonIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Position Management"
-                  sx={{ opacity: open ? 1 : 0, color: "white" }}
-                />
-              </ListItemButton>
-            </Link>
-          </ListItem>
-        </List>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                      color: "white",
+                    }}
+                  >
+                    <PersonIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Position Management"
+                    sx={{ opacity: open ? 1 : 0, color: "white" }}
+                  />
+                </ListItemButton>
+              </Link>
+            </ListItem>
+          </List>
 
-        <div className="openArrow">
-          {open ? (
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon sx={{ color: "white" }} />
-            </IconButton>
-          ) : (
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{ marginLeft: "5px", ...(open && { display: "none" }) }}
-            >
-              <ChevronRightIcon />
-            </IconButton>
-          )}
-        </div>
-      </Drawer>
-    </MainBox>
+          <div className="openArrow">
+            {open ? (
+              <IconButton onClick={handleDrawerClose}>
+                <ChevronLeftIcon sx={{ color: "white" }} />
+              </IconButton>
+            ) : (
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                sx={{ marginLeft: "5px", ...(open && { display: "none" }) }}
+              >
+                <ChevronRightIcon />
+              </IconButton>
+            )}
+          </div>
+        </Drawer>
+      </MainBox>
+    </div>
   );
 }

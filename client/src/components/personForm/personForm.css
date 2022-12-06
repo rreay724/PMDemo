@@ -1,0 +1,10 @@
+.inputRow{
+    display: flex;
+    margin-bottom:10px;
+    align-items:center;
+    justify-content:center;
+}
+
+.MenuItem:hover{
+    background-color:rgb(216, 216, 216);
+}
