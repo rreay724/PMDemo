@@ -14,8 +14,9 @@ export default function PersonsDataTable() {
 
   const columns = [
     {
-      field: "",
+      field: " ",
       width: 150,
+      sx: "bgcolor:white",
       renderCell: (cellValues) => {
         return (
           <Button

@@ -31,7 +31,7 @@ export default function BilletsDataTable() {
 
   const columns = [
     {
-      field: "",
+      field: " ",
       width: 150,
       renderCell: (cellValues) => {
         return (
