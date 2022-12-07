@@ -20,10 +20,8 @@ const PersonForm = ({ row }) => {
   const [phone, setPhone] = useState("");
   const [clearance, setClearance] = useState("");
 
-  console.log(row);
-
   useEffect(() => {
-    if (row) {
+    if (Object.keys(row).length !== 0) {
       setFirstName(row.firstName);
       setLastName(row.lastName);
       setAddress(row.address);
@@ -35,6 +33,8 @@ const PersonForm = ({ row }) => {
       setClearance(row.securityClearance);
     }
   }, [row]);
+
+  console.log(row);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,7 +49,7 @@ const PersonForm = ({ row }) => {
       email,
       securityClearance: clearance,
     };
-    if (row) {
+    if (Object.keys(row).length !== 0) {
       try {
         await axios.put(`/person/${row.id}`, newPerson);
         window.location.replace("/positionManagement");

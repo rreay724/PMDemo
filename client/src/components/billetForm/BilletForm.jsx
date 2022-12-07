@@ -31,7 +31,7 @@ const BilletForm = ({ row }) => {
   const [clearanceRequirement, setClearanceRequirement] = useState("");
 
   useEffect(() => {
-    if (row) {
+    if (Object.keys(row).length !== 0) {
       setBilletNumber(row.billetNumber);
       setBilletTitle(row.title);
       setBilletStatus(row.billetStatus);
@@ -52,7 +52,7 @@ const BilletForm = ({ row }) => {
       clearanceRequirement,
     };
 
-    if (row) {
+    if (Object.keys(row).length !== 0) {
       try {
         await axios.put(`/billet/${row.id}`, {
           billetNumber,

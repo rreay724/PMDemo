@@ -64,6 +64,10 @@ export default function PersonsDataTable() {
     fetchPersons();
   }, []);
 
+  const handleOpen = () => {
+    setRow({});
+    setOpen(true);
+  };
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
@@ -75,7 +79,7 @@ export default function PersonsDataTable() {
       <Button
         variant="outlined"
         sx={{ marginTop: "10px" }}
-        onClick={() => setOpen(true)}
+        onClick={handleOpen}
       >
         Add Person
       </Button>
