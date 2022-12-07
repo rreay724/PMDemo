@@ -7,26 +7,55 @@ import { PersonForm } from "../../components";
 
 import axios from "axios";
 
-const columns = [
-  { field: "firstName", headerName: "First name", width: 190 },
-  { field: "lastName", headerName: "Last name", width: 190 },
-  {
-    field: "email",
-    headerName: "Email",
-    width: 190,
-  },
-  {
-    field: "phone",
-    headerName: "Phone",
-    sortable: false,
-    width: 180,
-  },
-  { field: "securityClearance", headerName: "Security Clearance", width: 290 },
-];
-
 export default function PersonsDataTable() {
+  const [row, setRow] = useState({});
   const [persons, setPersons] = useState([]);
   const [open, setOpen] = useState(false);
+
+  const columns = [
+    {
+      field: "",
+      width: 150,
+      renderCell: (cellValues) => {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ padding: "5px" }}
+            onClick={(event) => {
+              handleClick(event, cellValues);
+            }}
+          >
+            View/Edit
+          </Button>
+        );
+      },
+    },
+    { field: "firstName", headerName: "First name", width: 190 },
+    { field: "lastName", headerName: "Last name", width: 190 },
+    {
+      field: "email",
+      headerName: "Email",
+      width: 190,
+    },
+    {
+      field: "phone",
+      headerName: "Phone",
+      sortable: false,
+      width: 180,
+    },
+    {
+      field: "securityClearance",
+      headerName: "Security Clearance",
+      width: 290,
+    },
+  ];
+
+  const handleClick = (event, cellValues) => {
+    setRow(cellValues.row);
+    setOpen(true);
+  };
+
   useEffect(() => {
     const fetchPersons = async () => {
       const res = await axios.get("/person");
@@ -42,7 +71,6 @@ export default function PersonsDataTable() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
       />
       <Button
         variant="outlined"
@@ -58,7 +86,7 @@ export default function PersonsDataTable() {
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <PersonForm />
+          <PersonForm row={row} />
         </Box>
       </Modal>
     </div>

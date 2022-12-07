@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
@@ -9,7 +9,7 @@ import axios from "axios";
 import "./personForm.css";
 import { Button, FormControl } from "@mui/material";
 
-const PersonForm = () => {
+const PersonForm = ({ row }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -19,6 +19,22 @@ const PersonForm = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [clearance, setClearance] = useState("");
+
+  console.log(row);
+
+  useEffect(() => {
+    if (row) {
+      setFirstName(row.firstName);
+      setLastName(row.lastName);
+      setAddress(row.address);
+      setCity(row.city);
+      setState(row.state);
+      setZip(row.zipCode);
+      setEmail(row.email);
+      setPhone(row.phone);
+      setClearance(row.securityClearance);
+    }
+  }, [row]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,12 +49,18 @@ const PersonForm = () => {
       email,
       securityClearance: clearance,
     };
-
-    try {
-      await axios.post("/person", newPerson);
-      window.location.replace("/positionManagement");
-    } catch (error) {
-      console.log(error);
+    if (row) {
+      try {
+        await axios.put(`/person/${row.id}`, newPerson);
+        window.location.replace("/positionManagement");
+      } catch (error) {}
+    } else {
+      try {
+        await axios.post("/person", newPerson);
+        window.location.replace("/positionManagement");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -56,10 +78,11 @@ const PersonForm = () => {
   };
 
   const clearances = [
+    "None",
     "Secret",
     "TS/SCI",
-    "FSP",
-    "CI",
+    "Full Scope Poly",
+    "CI Poly",
     "Public Trust",
     "Top Secret",
   ];
@@ -136,6 +159,7 @@ const PersonForm = () => {
               label="First Name"
               sx={{ marginRight: "10px", width: "100%" }}
               onChange={(e) => setFirstName(e.target.value)}
+              value={firstName}
             />
 
             <TextField
@@ -144,6 +168,7 @@ const PersonForm = () => {
               label="Last Name"
               sx={{ marginLeft: "10px", width: "100%" }}
               onChange={(e) => setLastName(e.target.value)}
+              value={lastName}
             />
           </div>
         </FormControl>
@@ -155,6 +180,7 @@ const PersonForm = () => {
               label="Address"
               sx={{ width: "100%" }}
               onChange={(e) => setAddress(e.target.value)}
+              value={address}
             />
           </div>
         </FormControl>
@@ -165,6 +191,7 @@ const PersonForm = () => {
             label="City"
             sx={{ width: "100%", marginRight: "10px" }}
             onChange={(e) => setCity(e.target.value)}
+            value={city}
           />
           <FormControl fullWidth>
             <InputLabel id="demo-select-small">State</InputLabel>
@@ -194,6 +221,7 @@ const PersonForm = () => {
             label="Zip Code"
             sx={{ width: "100%", marginLeft: "10px" }}
             onChange={(e) => setZip(e.target.value)}
+            value={zip}
           />
         </div>
         <div className="inputRow">
@@ -203,6 +231,7 @@ const PersonForm = () => {
             label="Phone"
             sx={{ width: "100%", marginRight: "10px" }}
             onChange={(e) => setPhone(e.target.value)}
+            value={phone}
           />
           <TextField
             variant="outlined"
@@ -210,6 +239,7 @@ const PersonForm = () => {
             label="Email"
             sx={{ width: "100%", marginRight: "10px" }}
             onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
           <FormControl fullWidth>
             <InputLabel id="demo-select-small">Security Clearance</InputLabel>

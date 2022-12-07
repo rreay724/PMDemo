@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
@@ -22,13 +22,24 @@ const style = {
   textAlign: "center",
 };
 
-const BilletForm = () => {
+const BilletForm = ({ row }) => {
   const [billetNumber, setBilletNumber] = useState("");
   const [billetTitle, setBilletTitle] = useState("");
   const [billetStatus, setBilletStatus] = useState("");
   const [exemptStatus, setExemptStatus] = useState("");
   const [travelRequirement, setTravelRequirement] = useState("");
   const [clearanceRequirement, setClearanceRequirement] = useState("");
+
+  useEffect(() => {
+    if (row) {
+      setBilletNumber(row.billetNumber);
+      setBilletTitle(row.title);
+      setBilletStatus(row.billetStatus);
+      setExemptStatus(row.exemptStatus);
+      setTravelRequirement(row.travelRequirement);
+      setClearanceRequirement(row.clearanceRequirement);
+    }
+  }, [row]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,13 +52,27 @@ const BilletForm = () => {
       clearanceRequirement,
     };
 
-    console.log(newBillet);
-
-    try {
-      await axios.post("/billet", newBillet);
-      window.location.replace("/positionManagement");
-    } catch (error) {
-      console.log(error);
+    if (row) {
+      try {
+        await axios.put(`/billet/${row.id}`, {
+          billetNumber,
+          title: billetTitle,
+          billetStatus,
+          exemptStatus,
+          travelRequirement,
+          clearanceRequirement,
+        });
+        window.location.replace("/positionManagement");
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        await axios.post("/billet", newBillet);
+        window.location.replace("/positionManagement");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -66,17 +91,17 @@ const BilletForm = () => {
   ];
 
   const clearances = [
+    "None",
     "Secret",
     "TS/SCI",
-    "FSP",
-    "CI",
+    "Full Scope Poly",
+    "CI Poly",
     "Public Trust",
     "Top Secret",
   ];
-
   const billetStatuses = ["Vacant", "Filled", " On hold", "Cancelled"];
-
   const exemptStatuses = ["Exempt", "Non-Exempt"];
+
   return (
     <Paper sx={style}>
       <h1>Person Form</h1>
@@ -89,14 +114,17 @@ const BilletForm = () => {
               label="Billet Number"
               sx={{ marginRight: "10px", width: "100%" }}
               onChange={(e) => setBilletNumber(e.target.value)}
+              value={billetNumber}
+              defaultValue={billetNumber}
             />
 
             <TextField
               variant="outlined"
               id="billetTitle"
-              label="BilletTitle"
+              label="Billet Title"
               sx={{ marginLeft: "10px", width: "100%" }}
               onChange={(e) => setBilletTitle(e.target.value)}
+              value={billetTitle}
             />
           </div>
         </FormControl>
