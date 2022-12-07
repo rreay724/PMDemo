@@ -11,12 +11,17 @@ export default function BilletsDataTable() {
   const [billets, setBillets] = useState([]);
   const [open, setOpen] = useState(false);
 
+  const fetchBillets = async () => {
+    const res = await axios.get("/billet");
+    setBillets(res.data);
+  };
+
   useEffect(() => {
-    const fetchBillets = async () => {
-      const res = await axios.get("/billet");
-      setBillets(res.data);
-    };
-    fetchBillets();
+    try {
+      fetchBillets();
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const handleClick = (event, cellValues) => {
@@ -27,6 +32,10 @@ export default function BilletsDataTable() {
   const handleOpen = () => {
     setRow({});
     setOpen(true);
+  };
+
+  const setOpenFromChild = (open) => {
+    setOpen(open);
   };
 
   const columns = [
@@ -91,7 +100,11 @@ export default function BilletsDataTable() {
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BilletForm row={row} />
+          <BilletForm
+            fetchBillets={fetchBillets}
+            row={row}
+            setOpen={setOpenFromChild}
+          />
         </Box>
       </Modal>
     </div>

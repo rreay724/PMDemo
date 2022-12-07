@@ -22,7 +22,7 @@ const style = {
   textAlign: "center",
 };
 
-const BilletForm = ({ row }) => {
+const BilletForm = ({ row, setOpen, fetchBillets }) => {
   const [billetNumber, setBilletNumber] = useState("");
   const [billetTitle, setBilletTitle] = useState("");
   const [billetStatus, setBilletStatus] = useState("");
@@ -62,14 +62,16 @@ const BilletForm = ({ row }) => {
           travelRequirement,
           clearanceRequirement,
         });
-        window.location.replace("/positionManagement");
+        setOpen(false);
+        fetchBillets();
       } catch (error) {
         console.log(error);
       }
     } else {
       try {
         await axios.post("/billet", newBillet);
-        window.location.replace("/positionManagement");
+        setOpen(false);
+        fetchBillets();
       } catch (error) {
         console.log(error);
       }
@@ -115,7 +117,6 @@ const BilletForm = ({ row }) => {
               sx={{ marginRight: "10px", width: "100%" }}
               onChange={(e) => setBilletNumber(e.target.value)}
               value={billetNumber}
-              defaultValue={billetNumber}
             />
 
             <TextField
@@ -219,6 +220,7 @@ const BilletForm = ({ row }) => {
             </Select>
           </FormControl>
         </div>
+
         <Button variant="contained" type="submit">
           Save
         </Button>

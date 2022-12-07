@@ -9,7 +9,7 @@ import axios from "axios";
 import "./personForm.css";
 import { Button, FormControl } from "@mui/material";
 
-const PersonForm = ({ row }) => {
+const PersonForm = ({ row, setOpen, fetchPersons }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -34,8 +34,6 @@ const PersonForm = ({ row }) => {
     }
   }, [row]);
 
-  console.log(row);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPerson = {
@@ -52,12 +50,14 @@ const PersonForm = ({ row }) => {
     if (Object.keys(row).length !== 0) {
       try {
         await axios.put(`/person/${row.id}`, newPerson);
-        window.location.replace("/positionManagement");
+        setOpen(false);
+        fetchPersons();
       } catch (error) {}
     } else {
       try {
         await axios.post("/person", newPerson);
-        window.location.replace("/positionManagement");
+        setOpen(false);
+        fetchPersons();
       } catch (error) {
         console.log(error);
       }

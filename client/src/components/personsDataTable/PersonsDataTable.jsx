@@ -57,18 +57,28 @@ export default function PersonsDataTable() {
     setOpen(true);
   };
 
+  const fetchPersons = async () => {
+    const res = await axios.get("/person");
+    setPersons(res.data);
+  };
+
   useEffect(() => {
-    const fetchPersons = async () => {
-      const res = await axios.get("/person");
-      setPersons(res.data);
-    };
-    fetchPersons();
+    try {
+      fetchPersons();
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const handleOpen = () => {
     setRow({});
     setOpen(true);
   };
+
+  const setOpenFromChild = (open) => {
+    setOpen(open);
+  };
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
@@ -91,7 +101,11 @@ export default function PersonsDataTable() {
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <PersonForm row={row} />
+          <PersonForm
+            row={row}
+            fetchPersons={fetchPersons}
+            setOpen={setOpenFromChild}
+          />
         </Box>
       </Modal>
     </div>
