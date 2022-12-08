@@ -19,10 +19,14 @@ const TableNavbar = ({ passTab }) => {
         onChange={handleChange}
         textColor="secondary"
         indicatorColor="secondary"
-        aria-label="secondary tabs example"
+        aria-label="table navbar tabs"
       >
-        <Tab value="one" label="Persons" onClick={() => setTab("persons")} />
-        <Tab value="two" label="Billets" />
+        <Tab
+          value="persons"
+          label="Persons"
+          onClick={() => setTab("persons")}
+        />
+        <Tab value="billets" label="Billets" />
       </Tabs>
     </Box>
   );

@@ -8,7 +8,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import "./positionManagement.css";
-import { positions } from "@mui/system";
 
 const PositionManagement = () => {
   const [value, setValue] = useState("one");

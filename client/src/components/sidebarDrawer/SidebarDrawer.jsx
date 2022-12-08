@@ -25,7 +25,6 @@ const openedMixin = (theme) => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
-  bgcolor: "#1976d2 !important",
 });
 
 const closedMixin = (theme) => ({
@@ -38,7 +37,6 @@ const closedMixin = (theme) => ({
   [theme.breakpoints.up("sm")]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
-  bgcolor: "#1976d2 !important",
 });
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -52,7 +50,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 const MainBox = styled(Box)(({ theme }) => ({
   zIndex: "999",
-  bgcolor: "#1976d2 !important",
 }));
 
 const Drawer = styled(MuiDrawer, {

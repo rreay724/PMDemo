@@ -1,4 +1,4 @@
-import { Navbar, SidebarDrawer } from "./components";
+import { Navbar } from "./components";
 import { Home, PositionManagement } from "./pages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
