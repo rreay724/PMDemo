@@ -85,6 +85,11 @@ export default function BilletsDataTable() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
+        sx={{
+          "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+            outline: "none !important",
+          },
+        }}
       />
       <Button
         variant="outlined"

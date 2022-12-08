@@ -15,14 +15,14 @@ export default function PersonsDataTable() {
   const columns = [
     {
       field: " ",
-      width: 150,
+      width: 200,
       sx: "bgcolor:white",
       renderCell: (cellValues) => {
         return (
           <Button
             variant="contained"
             color="primary"
-            sx={{ padding: "5px" }}
+            sx={{ padding: "5px", marginRight: "5px" }}
             onClick={(event) => {
               handleClick(event, cellValues);
             }}
@@ -86,6 +86,11 @@ export default function PersonsDataTable() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
+        sx={{
+          "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+            outline: "none !important",
+          },
+        }}
       />
       <Button
         variant="outlined"

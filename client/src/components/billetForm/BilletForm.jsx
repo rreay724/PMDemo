@@ -5,8 +5,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import axios from "axios";
-
-import "./billetForm.css";
 import { Button, FormControl } from "@mui/material";
 
 const style = {
@@ -54,14 +52,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
 
     if (Object.keys(row).length !== 0) {
       try {
-        await axios.put(`/billet/${row.id}`, {
-          billetNumber,
-          title: billetTitle,
-          billetStatus,
-          exemptStatus,
-          travelRequirement,
-          clearanceRequirement,
-        });
+        await axios.put(`/billet/${row.id}`, newBillet);
         setOpen(false);
         fetchBillets();
       } catch (error) {
