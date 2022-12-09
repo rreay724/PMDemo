@@ -75,6 +75,12 @@ export default function PersonsDataTable() {
     setOpen(true);
   };
 
+  const handleClose = (event, reason) => {
+    if (reason !== "backdropClick") {
+      setOpen(false);
+    }
+  };
+
   const setOpenFromChild = (open) => {
     setOpen(open);
   };
@@ -101,7 +107,7 @@ export default function PersonsDataTable() {
       </Button>
       <Modal
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

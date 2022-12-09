@@ -78,6 +78,12 @@ export default function BilletsDataTable() {
     },
   ];
 
+  const handleClose = (event, reason) => {
+    if (reason !== "backdropClick") {
+      setOpen(false);
+    }
+  };
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
@@ -100,7 +106,7 @@ export default function BilletsDataTable() {
       </Button>
       <Modal
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
