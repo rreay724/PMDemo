@@ -1,10 +1,6 @@
-.positionManagement{
-    /* margin:50px; */
-}
-
 .table{
-    width:70%;
+    width:80%;
     position: absolute;
-    left: 15%;
+    left: 10%;
     top: 15%;
 }

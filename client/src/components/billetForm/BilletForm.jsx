@@ -269,9 +269,15 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
             </Select>
           </FormControl>
         </div>
-
-        <Button variant="contained" type="submit">
+        <Button variant="contained" type="submit" sx={{ marginRight: "5px" }}>
           Save
+        </Button>
+        <Button
+          onClick={() => setOpen(false)}
+          variant="contained"
+          sx={{ marginLeft: "5px", bgcolor: "red" }}
+        >
+          Cancel
         </Button>
       </form>
     </Paper>
