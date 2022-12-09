@@ -8,3 +8,8 @@
 .MenuItem:hover{
     background-color:rgb(216, 216, 216);
 }
+
+.header{
+    padding-bottom: 20px;
+    font-family: "Helvetica Neue",sans-serif;
+}

@@ -149,7 +149,7 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
 
   return (
     <Paper sx={style}>
-      <h1>Person Form</h1>
+      <h1 className="header">Person Form</h1>
       <form onSubmit={handleSubmit}>
         <FormControl fullWidth>
           <div className="inputRow">
@@ -272,7 +272,11 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
         <Button
           onClick={() => setOpen(false)}
           variant="contained"
-          sx={{ marginLeft: "5px", bgcolor: "red" }}
+          sx={{
+            marginLeft: "5px",
+            bgcolor: "red",
+            "&:hover": { bgcolor: "#d1001f" },
+          }}
         >
           Cancel
         </Button>

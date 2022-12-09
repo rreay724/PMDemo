@@ -6,6 +6,7 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import axios from "axios";
 import { Button, FormControl } from "@mui/material";
+import "./billetForm.css";
 
 const style = {
   position: "absolute",
@@ -124,7 +125,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
 
   return (
     <Paper sx={style}>
-      <h1>Person Form</h1>
+      <h1 className="header">Billet Form</h1>
       <form onSubmit={handleSubmit}>
         <FormControl fullWidth>
           <div className="inputRow">
@@ -275,7 +276,11 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
         <Button
           onClick={() => setOpen(false)}
           variant="contained"
-          sx={{ marginLeft: "5px", bgcolor: "red" }}
+          sx={{
+            marginLeft: "5px",
+            bgcolor: "red",
+            "&:hover": { bgcolor: "#d1001f" },
+          }}
         >
           Cancel
         </Button>
