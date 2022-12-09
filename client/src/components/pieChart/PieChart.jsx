@@ -28,6 +28,7 @@ const PieChart = () => {
   }, []);
 
   const data = billets.map((billet) => billet.billetStatus);
+
   function numOfBilletStatus(array, value) {
     let count = 0;
     array.filter((v) => v === value && count++);
