@@ -10,6 +10,7 @@ router.post("/", async (req, res) => {
       exemptStatus: req.body.exemptStatus,
       travelRequirement: req.body.travelRequirement,
       clearanceRequirement: req.body.clearanceRequirement,
+      person: req.body.person,
     });
 
     const billet = await newBillet.save();

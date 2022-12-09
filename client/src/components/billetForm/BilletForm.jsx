@@ -27,6 +27,8 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
   const [exemptStatus, setExemptStatus] = useState("");
   const [travelRequirement, setTravelRequirement] = useState("");
   const [clearanceRequirement, setClearanceRequirement] = useState("");
+  const [persons, setPersons] = useState([]);
+  const [person, setPerson] = useState("");
 
   useEffect(() => {
     if (Object.keys(row).length !== 0) {
@@ -36,19 +38,44 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
       setExemptStatus(row.exemptStatus);
       setTravelRequirement(row.travelRequirement);
       setClearanceRequirement(row.clearanceRequirement);
+      if (row.person) {
+        setPerson(row.person);
+      }
     }
   }, [row]);
 
+  useEffect(() => {
+    const getPersons = async () => {
+      const res = await axios.get("/person");
+      setPersons(res.data);
+    };
+
+    getPersons();
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newBillet = {
-      billetNumber,
-      title: billetTitle,
-      billetStatus,
-      exemptStatus,
-      travelRequirement,
-      clearanceRequirement,
-    };
+    let newBillet = {};
+    if (person) {
+      newBillet = {
+        billetNumber,
+        title: billetTitle,
+        billetStatus,
+        exemptStatus,
+        travelRequirement,
+        clearanceRequirement,
+        person,
+      };
+    } else {
+      newBillet = {
+        billetNumber,
+        title: billetTitle,
+        billetStatus,
+        exemptStatus,
+        travelRequirement,
+        clearanceRequirement,
+      };
+    }
 
     if (Object.keys(row).length !== 0) {
       try {
@@ -92,7 +119,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
     "Public Trust",
     "Top Secret",
   ];
-  const billetStatuses = ["Vacant", "Filled", " On hold", "Cancelled"];
+  const billetStatuses = ["Vacant", "Filled", "On-hold", "Cancelled"];
   const exemptStatuses = ["Exempt", "Non-Exempt"];
 
   return (
@@ -133,6 +160,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
                 color: "black !important",
                 textAlign: "left",
               }}
+              defaultValue=""
               onChange={(e) => setBilletStatus(e.target.value)}
             >
               {billetStatuses.map((status) => (
@@ -153,6 +181,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
                 color: "black !important",
                 textAlign: "left",
               }}
+              defaultValue=""
               onChange={(e) => setExemptStatus(e.target.value)}
             >
               {exemptStatuses.map((status) => (
@@ -177,6 +206,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
                 color: "black !important",
                 textAlign: "left",
               }}
+              defaultValue=""
               onChange={(e) => setClearanceRequirement(e.target.value)}
             >
               {clearances.map((clearance) => (
@@ -201,11 +231,39 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
                 color: "black !important",
                 textAlign: "left",
               }}
+              defaultValue=""
               onChange={(e) => setTravelRequirement(e.target.value)}
             >
               {travelRequirements.map((travel) => (
                 <MenuItem sx={{ bgcolor: "#fff" }} value={travel} key={travel}>
                   {travel}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        <div className="inputRow">
+          <FormControl fullWidth>
+            <InputLabel id="demo-select-small">Attach Person</InputLabel>
+
+            <Select
+              value={person}
+              defaultValue={person}
+              label="Attach Person"
+              sx={{
+                width: "100%",
+                color: "black !important",
+                textAlign: "left",
+              }}
+              onChange={(e) => setPerson(e.target.value)}
+            >
+              {persons.map((person) => (
+                <MenuItem
+                  sx={{ bgcolor: "#fff" }}
+                  value={person.id}
+                  key={person.id}
+                >
+                  {`${person.lastName}, ${person.firstName}`}
                 </MenuItem>
               ))}
             </Select>

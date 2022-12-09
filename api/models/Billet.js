@@ -8,6 +8,10 @@ const BilletSchema = new mongoose.Schema(
     exemptStatus: { type: String, required: true },
     travelRequirement: { type: String, required: true },
     clearanceRequirement: { type: String, required: true },
+    person: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Person",
+    },
   },
   { timestamps: true }
 );
