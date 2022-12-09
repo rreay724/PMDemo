@@ -1,0 +1,8 @@
+.dashboard{
+    box-sizing: border-box;
+    border:1px solid lightgray;
+    height:100%;
+    position:relative;
+    display: flex;
+    flex-direction: column;
+}

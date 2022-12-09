@@ -3,6 +3,7 @@ import {
   PersonsDataTable,
   BilletsDataTable,
   TableHeader,
+  Dashboard,
 } from "../../components";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -11,7 +12,7 @@ import "./positionManagement.css";
 
 const PositionManagement = () => {
   const [value, setValue] = useState("one");
-  const [tab, setTab] = useState("persons");
+  const [tab, setTab] = useState("dashboard");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -30,11 +31,16 @@ const PositionManagement = () => {
           >
             <Tab
               value="one"
+              label="Dashboard"
+              onClick={() => setTab("dashboard")}
+            />
+            <Tab
+              value="two"
               label="Persons"
               onClick={() => setTab("persons")}
             />
             <Tab
-              value="two"
+              value="three"
               label="Billets"
               onClick={() => setTab("billets")}
             />
@@ -43,6 +49,7 @@ const PositionManagement = () => {
         <TableHeader />
         {tab === "persons" && <PersonsDataTable />}
         {tab === "billets" && <BilletsDataTable />}
+        {tab === "dashboard" && <Dashboard />}
       </div>
     </div>
   );

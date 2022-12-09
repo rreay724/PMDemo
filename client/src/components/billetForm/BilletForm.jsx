@@ -119,7 +119,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
     "Public Trust",
     "Top Secret",
   ];
-  const billetStatuses = ["Vacant", "Filled", " On hold", "Cancelled"];
+  const billetStatuses = ["Vacant", "Filled", "On-hold", "Cancelled"];
   const exemptStatuses = ["Exempt", "Non-Exempt"];
 
   return (

@@ -6,3 +6,5 @@ export { default as TableNavbar } from "./tableNavbar/TableNavbar";
 export { default as TableHeader } from "./tableHeader/TableHeader";
 export { default as PersonForm } from "./personForm/PersonForm";
 export { default as BilletForm } from "./billetForm/BilletForm";
+export { default as Dashboard } from "./dashboard/Dashboard";
+export { default as PieChart } from "./pieChart/PieChart";
