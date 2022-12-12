@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
     const billet = await newBillet.save();
     res.status(200).json(billet);
   } catch (error) {
-    console.log({ message: "Error creating Billet" });
+    console.log({ message: "Error creating Billet", error });
   }
 });
 
@@ -25,6 +25,20 @@ router.put("/:id", async (req, res) => {
     const updatedBillet = await Billet.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json(updatedBillet);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// Remove person from billet
+router.put("/person/:id", async (req, res) => {
+  try {
+    const updatedBillet = await Billet.findOneAndUpdate(
+      req.params.id,
+      { $unset: { person: "" } },
       { new: true }
     );
     res.status(200).json(updatedBillet);
