@@ -36,7 +36,7 @@ router.put("/:id", async (req, res) => {
 // Remove person from billet
 router.put("/person/:id", async (req, res) => {
   try {
-    const updatedBillet = await Billet.findOneAndUpdate(
+    const updatedBillet = await Billet.findByIdAndUpdate(
       req.params.id,
       { $unset: { person: "" } },
       { new: true }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Drawer, SidebarDrawer } from "../../components";
+import { SidebarDrawer } from "../../components";
 import "./home.css";
 
 const Home = () => {
