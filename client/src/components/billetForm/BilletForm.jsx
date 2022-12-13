@@ -282,9 +282,9 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
           <Button
             variant="contained"
             onClick={handleRemovePerson}
-            sx={{ marginRight: "5px" }}
+            sx={{ marginLeft: "20px" }}
           >
-            Remove Person
+            Remove
           </Button>
         </div>
         <Button variant="contained" type="submit" sx={{ marginRight: "5px" }}>
