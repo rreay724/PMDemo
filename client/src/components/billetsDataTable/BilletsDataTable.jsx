@@ -34,8 +34,14 @@ export default function BilletsDataTable() {
     setOpen(true);
   };
 
-  const setOpenFromChild = (open) => {
+  const setOpenFromForm = (open) => {
     setOpen(open);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason !== "backdropClick") {
+      setOpen(false);
+    }
   };
 
   const columns = [
@@ -78,12 +84,6 @@ export default function BilletsDataTable() {
     },
   ];
 
-  const handleClose = (event, reason) => {
-    if (reason !== "backdropClick") {
-      setOpen(false);
-    }
-  };
-
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
@@ -114,7 +114,7 @@ export default function BilletsDataTable() {
           <BilletForm
             fetchBillets={fetchBillets}
             row={row}
-            setOpen={setOpenFromChild}
+            setOpen={setOpenFromForm}
           />
         </Box>
       </Modal>

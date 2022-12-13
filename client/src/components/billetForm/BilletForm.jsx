@@ -54,6 +54,16 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
     getPersons();
   });
 
+  const handleRemovePerson = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`/billet/person/${row.id}`);
+      setPerson("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let newBillet = {};
@@ -269,6 +279,13 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
               ))}
             </Select>
           </FormControl>
+          <Button
+            variant="contained"
+            onClick={handleRemovePerson}
+            sx={{ marginLeft: "20px" }}
+          >
+            Remove
+          </Button>
         </div>
         <Button variant="contained" type="submit" sx={{ marginRight: "5px" }}>
           Save
