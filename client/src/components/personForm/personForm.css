@@ -5,6 +5,13 @@
     justify-content:center;
 }
 
+.inputRow-billets{
+    display: grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+
+}
+
 .MenuItem:hover{
     background-color:rgb(216, 216, 216);
 }

@@ -6,6 +6,12 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import axios from "axios";
 import { Button, FormControl } from "@mui/material";
+import {
+  travelRequirements,
+  exemptStatuses,
+  clearances,
+  billetStatuses,
+} from "./values";
 import "./billetForm.css";
 
 const style = {
@@ -106,32 +112,6 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
       }
     }
   };
-
-  const travelRequirements = [
-    "0%",
-    "10%",
-    "20%",
-    "30%",
-    "40%",
-    "50%",
-    "60%",
-    "70%",
-    "80%",
-    "90%",
-    "100%",
-  ];
-
-  const clearances = [
-    "None",
-    "Secret",
-    "TS/SCI",
-    "Full Scope Poly",
-    "CI Poly",
-    "Public Trust",
-    "Top Secret",
-  ];
-  const billetStatuses = ["Vacant", "Filled", "On-hold", "Cancelled"];
-  const exemptStatuses = ["Exempt", "Non-Exempt"];
 
   return (
     <Paper sx={style}>
