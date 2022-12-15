@@ -117,29 +117,27 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
     <Paper sx={style}>
       <h1 className="header">Billet Form</h1>
       <form onSubmit={handleSubmit}>
-        <FormControl fullWidth>
-          <div className="inputRow">
-            <TextField
-              variant="outlined"
-              id="billetNumber"
-              label="Billet Number"
-              sx={{ width: "100%" }}
-              onChange={(e) => setBilletNumber(e.target.value)}
-              value={billetNumber}
-            />
+        <div className="inputBilletRow">
+          <TextField
+            variant="outlined"
+            id="billetNumber"
+            label="Billet Number"
+            sx={{ width: "100%" }}
+            onChange={(e) => setBilletNumber(e.target.value)}
+            value={billetNumber}
+          />
 
-            <TextField
-              variant="outlined"
-              id="billetTitle"
-              label="Billet Title"
-              sx={{ width: "100%" }}
-              onChange={(e) => setBilletTitle(e.target.value)}
-              value={billetTitle}
-            />
-          </div>
-        </FormControl>
+          <TextField
+            variant="outlined"
+            id="billetTitle"
+            label="Billet Title"
+            sx={{ width: "100%" }}
+            onChange={(e) => setBilletTitle(e.target.value)}
+            value={billetTitle}
+          />
+        </div>
 
-        <div className="inputRow">
+        <div className="inputBilletRow">
           <FormControl fullWidth>
             <InputLabel id="demo-select-small">Billet Status</InputLabel>
 
@@ -183,12 +181,9 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
             </Select>
           </FormControl>
         </div>
-        <div className="inputRow">
+        <div className="inputBilletRow">
           <FormControl fullWidth>
-            <InputLabel id="demo-select-small">
-              Clearance Requirement
-            </InputLabel>
-
+            <InputLabel>Clearance Requirement</InputLabel>
             <Select
               value={clearanceRequirement}
               label="Clearance Requirement"
