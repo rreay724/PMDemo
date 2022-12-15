@@ -65,7 +65,6 @@ export default function PersonsDataTable() {
       const res = await axios.get("/person");
       setPersons(res.data);
       setLoaded(true);
-      console.log("Persons", persons);
     } catch (error) {
       console.log(error);
     }
@@ -73,6 +72,7 @@ export default function PersonsDataTable() {
 
   useEffect(() => {
     fetchPersons();
+    console.log(persons);
   }, []);
 
   const handleOpen = () => {
