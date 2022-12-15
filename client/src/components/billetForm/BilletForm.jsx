@@ -123,7 +123,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
               variant="outlined"
               id="billetNumber"
               label="Billet Number"
-              sx={{ marginRight: "10px", width: "100%" }}
+              sx={{ width: "100%" }}
               onChange={(e) => setBilletNumber(e.target.value)}
               value={billetNumber}
             />
@@ -132,7 +132,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
               variant="outlined"
               id="billetTitle"
               label="Billet Title"
-              sx={{ marginLeft: "10px", width: "100%" }}
+              sx={{ width: "100%" }}
               onChange={(e) => setBilletTitle(e.target.value)}
               value={billetTitle}
             />
@@ -233,7 +233,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
             </Select>
           </FormControl>
         </div>
-        <div className="inputRow">
+        <div className="inputRow-person">
           <FormControl fullWidth>
             <InputLabel id="demo-select-small">Attach Person</InputLabel>
 
@@ -262,7 +262,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
           <Button
             variant="contained"
             onClick={handleRemovePerson}
-            sx={{ marginLeft: "20px" }}
+            sx={{ marginLeft: "20px", height: "45px" }}
           >
             Remove
           </Button>
