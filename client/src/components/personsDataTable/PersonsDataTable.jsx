@@ -4,6 +4,8 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { PersonForm } from "../../components";
+import Stack from "@mui/material/Stack";
+import LinearProgress from "@mui/material/LinearProgress";
 
 import axios from "axios";
 
@@ -11,6 +13,7 @@ export default function PersonsDataTable() {
   const [row, setRow] = useState({});
   const [persons, setPersons] = useState([]);
   const [open, setOpen] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const columns = [
     {
@@ -58,16 +61,18 @@ export default function PersonsDataTable() {
   };
 
   const fetchPersons = async () => {
-    const res = await axios.get("/person");
-    setPersons(res.data);
-  };
-
-  useEffect(() => {
     try {
-      fetchPersons();
+      const res = await axios.get("/person");
+      setPersons(res.data);
+      setLoaded(true);
+      console.log("Persons", persons);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  useEffect(() => {
+    fetchPersons();
   }, []);
 
   const handleOpen = () => {
@@ -87,6 +92,11 @@ export default function PersonsDataTable() {
 
   return (
     <div style={{ height: 400, width: "100%" }}>
+      {!loaded && (
+        <Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}>
+          <LinearProgress color="success" />
+        </Stack>
+      )}
       <DataGrid
         rows={persons}
         columns={columns}

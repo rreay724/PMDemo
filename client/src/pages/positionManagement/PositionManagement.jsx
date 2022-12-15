@@ -47,6 +47,7 @@ const PositionManagement = () => {
           </Tabs>
         </Box>
         <TableHeader />
+
         {tab === "persons" && <PersonsDataTable />}
         {tab === "billets" && <BilletsDataTable />}
         {tab === "dashboard" && <Dashboard />}
