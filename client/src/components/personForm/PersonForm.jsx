@@ -23,21 +23,6 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
   const [billets, setBillets] = useState([]);
   let attachedBillets = [];
 
-  // populate fields if clicked view/edit
-  useEffect(() => {
-    if (Object.keys(row).length !== 0) {
-      setFirstName(row.firstName);
-      setLastName(row.lastName);
-      setAddress(row.address);
-      setCity(row.city);
-      setState(row.state);
-      setZip(row.zipCode);
-      setEmail(row.email);
-      setPhone(row.phone);
-      setClearance(row.securityClearance);
-    }
-  }, [row]);
-
   const fetchBillets = async () => {
     try {
       const res = await axios.get("/billet");
@@ -46,12 +31,6 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
       console.log(error);
     }
   };
-
-  // get billets then push to array any billets that contain person id matching person clicked view
-  // if no row.id, meaning Add Person clicked, do nothing
-  useState(() => {
-    fetchBillets();
-  }, []);
 
   billets.forEach((billet) => {
     if (billet.person === row.id && row.id !== undefined) {
@@ -88,6 +67,27 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
       }
     }
   };
+
+  // populate fields if clicked view/edit
+  useEffect(() => {
+    if (Object.keys(row).length !== 0) {
+      setFirstName(row.firstName);
+      setLastName(row.lastName);
+      setAddress(row.address);
+      setCity(row.city);
+      setState(row.state);
+      setZip(row.zipCode);
+      setEmail(row.email);
+      setPhone(row.phone);
+      setClearance(row.securityClearance);
+    }
+  }, [row]);
+
+  // get billets then push to array any billets that contain person id matching person clicked view
+  // if no row.id, meaning Add Person clicked, do nothing
+  useState(() => {
+    fetchBillets();
+  }, []);
 
   return (
     <Paper sx={style}>
