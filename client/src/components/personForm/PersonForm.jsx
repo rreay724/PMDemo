@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import axios from "axios";
+import { states, style, clearances } from "./values";
 
 import "./personForm.css";
 import { Button, FormControl } from "@mui/material";
@@ -19,20 +20,23 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [clearance, setClearance] = useState("");
+  const [billets, setBillets] = useState([]);
+  let attachedBillets = [];
 
-  useEffect(() => {
-    if (Object.keys(row).length !== 0) {
-      setFirstName(row.firstName);
-      setLastName(row.lastName);
-      setAddress(row.address);
-      setCity(row.city);
-      setState(row.state);
-      setZip(row.zipCode);
-      setEmail(row.email);
-      setPhone(row.phone);
-      setClearance(row.securityClearance);
+  const fetchBillets = async () => {
+    try {
+      const res = await axios.get("/billet");
+      setBillets(res.data);
+    } catch (error) {
+      console.log(error);
     }
-  }, [row]);
+  };
+
+  billets.forEach((billet) => {
+    if (billet.person === row.id && row.id !== undefined) {
+      attachedBillets.push(billet);
+    }
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,88 +68,26 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
     }
   };
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "55rem",
-    bgcolor: "#fff !important",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-    textAlign: "center",
-  };
+  // populate fields if clicked view/edit
+  useEffect(() => {
+    if (Object.keys(row).length !== 0) {
+      setFirstName(row.firstName);
+      setLastName(row.lastName);
+      setAddress(row.address);
+      setCity(row.city);
+      setState(row.state);
+      setZip(row.zipCode);
+      setEmail(row.email);
+      setPhone(row.phone);
+      setClearance(row.securityClearance);
+    }
+  }, [row]);
 
-  const clearances = [
-    "None",
-    "Secret",
-    "TS/SCI",
-    "Full Scope Poly",
-    "CI Poly",
-    "Public Trust",
-    "Top Secret",
-  ];
-
-  const states = [
-    "Alabama",
-    "Alaska",
-    "American Samoa",
-    "Arizona",
-    "Arkansas",
-    "California",
-    "Colorado",
-    "Connecticut",
-    "Delaware",
-    "District of Columbia",
-    "Florida",
-    "Georgia",
-    "Guam",
-    "Hawaii",
-    "Idaho",
-    "Illinois",
-    "Indiana",
-    "Iowa",
-    "Kansas",
-    "Kentucky",
-    "Louisiana",
-    "Maine",
-    "Maryland",
-    "Massachusetts",
-    "Michigan",
-    "Minnesota",
-    "Minor Outlying Islands",
-    "Mississippi",
-    "Missouri",
-    "Montana",
-    "Nebraska",
-    "Nevada",
-    "New Hampshire",
-    "New Jersey",
-    "New Mexico",
-    "New York",
-    "North Carolina",
-    "North Dakota",
-    "Northern Mariana Islands",
-    "Ohio",
-    "Oklahoma",
-    "Oregon",
-    "Pennsylvania",
-    "Puerto Rico",
-    "Rhode Island",
-    "South Carolina",
-    "South Dakota",
-    "Tennessee",
-    "Texas",
-    "U.S. Virgin Islands",
-    "Utah",
-    "Vermont",
-    "Virginia",
-    "Washington",
-    "West Virginia",
-    "Wisconsin",
-    "Wyoming",
-  ];
+  // get billets then push to array any billets that contain person id matching person clicked view
+  // if no row.id, meaning Add Person clicked, do nothing
+  useState(() => {
+    fetchBillets();
+  }, []);
 
   return (
     <Paper sx={style}>
@@ -265,6 +207,23 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
               ))}
             </Select>
           </FormControl>
+        </div>
+        {attachedBillets.length !== 0 && (
+          <h1 className="header">Attached Billets</h1>
+        )}
+        <div className="inputRow-billets">
+          {attachedBillets.map((billet) => (
+            <TextField
+              key={billet.id}
+              variant="outlined"
+              id="billet"
+              sx={{ width: "100%", marginRight: "10px", marginBottom: "10px" }}
+              value={`${billet.title} - ${billet.billetNumber}`}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          ))}
         </div>
         <Button variant="contained" type="submit" sx={{ marginRight: "5px" }}>
           Save

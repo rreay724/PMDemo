@@ -12,6 +12,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import PersonIcon from "@mui/icons-material/Person";
+import Tooltip from "@mui/material/Tooltip";
 import { Link } from "react-router-dom";
 
 import "./sidebarDrawer.css";
@@ -105,28 +106,30 @@ export default function SidebarDrawer() {
           <List>
             <ListItem disablePadding sx={{ display: "block" }}>
               <Link className="link" to="/positionManagement">
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
+                <Tooltip title="Position Management">
+                  <ListItemButton
                     sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
-                      color: "white",
+                      minHeight: 48,
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
                     }}
                   >
-                    <PersonIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Position Management"
-                    sx={{ opacity: open ? 1 : 0, color: "white" }}
-                  />
-                </ListItemButton>
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        justifyContent: "center",
+                        color: "white",
+                      }}
+                    >
+                      <PersonIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Position Management"
+                      sx={{ opacity: open ? 1 : 0, color: "white" }}
+                    />
+                  </ListItemButton>
+                </Tooltip>
               </Link>
             </ListItem>
           </List>
