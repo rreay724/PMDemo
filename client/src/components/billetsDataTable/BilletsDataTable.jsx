@@ -5,23 +5,27 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { BilletForm } from "../";
+import Stack from "@mui/material/Stack";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export default function BilletsDataTable() {
   const [row, setRow] = useState({});
   const [billets, setBillets] = useState([]);
   const [open, setOpen] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const fetchBillets = async () => {
-    const res = await axios.get("/billet");
-    setBillets(res.data);
-  };
-
-  useEffect(() => {
     try {
-      fetchBillets();
+      const res = await axios.get("/billet");
+      setBillets(res.data);
+      setLoaded(true);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  useEffect(() => {
+    fetchBillets();
   }, []);
 
   const handleClick = (event, cellValues) => {
@@ -86,6 +90,11 @@ export default function BilletsDataTable() {
 
   return (
     <div style={{ height: 400, width: "100%" }}>
+      {!loaded && (
+        <Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}>
+          <LinearProgress color="success" />
+        </Stack>
+      )}
       <DataGrid
         rows={billets}
         columns={columns}
