@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
@@ -49,7 +50,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
         setPerson(row.person);
       }
     }
-  }, [row]);
+  }, []);
 
   useEffect(() => {
     const getPersons = async () => {
@@ -58,7 +59,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
     };
 
     getPersons();
-  });
+  }, []);
 
   const handleRemovePerson = async (e) => {
     e.preventDefault();
@@ -112,6 +113,14 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
       }
     }
   };
+
+  const top5Songs = [
+    { title: "Organise" },
+    { title: "Joha" },
+    { title: "Terminator" },
+    { title: "Dull" },
+    { title: "Nzaza" },
+  ];
 
   return (
     <Paper sx={style}>
@@ -235,9 +244,21 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
         </div>
         <div className="inputRow">
           <FormControl fullWidth>
-            <InputLabel id="demo-select-small">Attach Person</InputLabel>
+            {/* <InputLabel id="demo-select-small">Attach Person</InputLabel> */}
+            <Autocomplete
+              id="combo-box-demo"
+              options={persons.map(
+                (person) => `${person.lastName}, ${person.firstName}`
+              )}
+              onChange={(e) => setPerson(e.target.value)}
+              sx={{ width: "100%" }}
+              value={person}
+              renderInput={(params) => (
+                <TextField {...params} label="Attach Person" />
+              )}
+            />
 
-            <Select
+            {/* <Select
               value={person}
               defaultValue={person}
               label="Attach Person"
@@ -257,7 +278,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
                   {`${person.lastName}, ${person.firstName}`}
                 </MenuItem>
               ))}
-            </Select>
+            </Select> */}
           </FormControl>
           <Button
             variant="contained"
