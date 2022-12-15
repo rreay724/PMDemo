@@ -21,7 +21,7 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
   const [phone, setPhone] = useState("");
   const [clearance, setClearance] = useState("");
   const [billets, setBillets] = useState([]);
-  const attachedBillets = [];
+  let attachedBillets = [];
 
   // populate fields if clicked view/edit
   useEffect(() => {
@@ -47,17 +47,17 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
     }
   };
 
+  // get billets then push to array any billets that contain person id matching person clicked view
+  // if no row.id, meaning Add Person clicked, do nothing
   useState(() => {
     fetchBillets();
   }, []);
 
   billets.forEach((billet) => {
-    if (billet.person === row.id) {
+    if (billet.person === row.id && row.id !== undefined) {
       attachedBillets.push(billet);
     }
   });
-
-  console.log(attachedBillets);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -214,6 +214,7 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
         <div className="inputRow-billets">
           {attachedBillets.map((billet) => (
             <TextField
+              key={billet.id}
               variant="outlined"
               id="billet"
               sx={{ width: "100%", marginRight: "10px", marginBottom: "10px" }}
