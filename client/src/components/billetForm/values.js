@@ -21,5 +21,5 @@ export const clearances = [
   "Public Trust",
   "Top Secret",
 ];
-export const billetStatuses = ["Vacant", "Filled", "On-hold", "Cancelled"];
+export const billetStatuses = ["Vacant", "On-hold", "Cancelled", "Filled"];
 export const exemptStatuses = ["Exempt", "Non-Exempt"];

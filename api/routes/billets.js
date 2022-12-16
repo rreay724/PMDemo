@@ -57,8 +57,14 @@ router.get("/:id", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
+  const person = req.query.person;
+  let billets;
   try {
-    const billets = await Billet.find();
+    if (person) {
+      billets = await Billet.find({ person });
+    } else {
+      billets = await Billet.find();
+    }
     res.status(200).json(billets);
   } catch (error) {
     console.log(error);

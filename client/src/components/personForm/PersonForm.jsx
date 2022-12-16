@@ -23,20 +23,16 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
   const [billets, setBillets] = useState([]);
   let attachedBillets = [];
 
+  // fetch billets where person id equals row.id which is person id
   const fetchBillets = async () => {
     try {
-      const res = await axios.get("/billet");
+      // this equals /billets?person=row.id
+      const res = await axios.get("/billet", { params: { person: row.id } });
       setBillets(res.data);
     } catch (error) {
       console.log(error);
     }
   };
-
-  billets.forEach((billet) => {
-    if (billet.person === row.id && row.id !== undefined) {
-      attachedBillets.push(billet);
-    }
-  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,6 +84,8 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
   useState(() => {
     fetchBillets();
   }, []);
+
+  console.log(billets);
 
   return (
     <Paper sx={style}>
@@ -212,7 +210,7 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
           <h1 className="header">Attached Billets</h1>
         )}
         <div className="inputRow-billets">
-          {attachedBillets.map((billet) => (
+          {billets.map((billet) => (
             <TextField
               key={billet.id}
               variant="outlined"
