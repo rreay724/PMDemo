@@ -21,7 +21,6 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
   const [phone, setPhone] = useState("");
   const [clearance, setClearance] = useState("");
   const [billets, setBillets] = useState([]);
-  let attachedBillets = [];
 
   // fetch billets where person id equals row.id which is person id
   const fetchBillets = async () => {
@@ -202,9 +201,7 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
             </Select>
           </FormControl>
         </div>
-        {attachedBillets.length !== 0 && (
-          <h1 className="header">Attached Billets</h1>
-        )}
+        {billets.length !== 0 && <h1 className="header">Attached Billets</h1>}
         <div className="inputRow-billets">
           {billets.map((billet) => (
             <TextField
