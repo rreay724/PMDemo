@@ -79,13 +79,9 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
     }
   }, [row]);
 
-  // get billets then push to array any billets that contain person id matching person clicked view
-  // if no row.id, meaning Add Person clicked, do nothing
   useState(() => {
     fetchBillets();
   }, []);
-
-  console.log(billets);
 
   return (
     <Paper sx={style}>
