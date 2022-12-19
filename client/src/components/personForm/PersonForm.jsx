@@ -21,6 +21,8 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
   const [phone, setPhone] = useState("");
   const [clearance, setClearance] = useState("");
   const [billets, setBillets] = useState([]);
+  let travelRequirements = [];
+  let travelRequirement = 0;
 
   // fetch billets where person id equals row.id which is person id
   const fetchBillets = async () => {
@@ -83,6 +85,15 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
   useState(() => {
     fetchBillets();
   }, []);
+
+  // get highest travel requirement percentage from attached billets to display in form otherwise it defaults to 0
+  if (billets.length !== 0) {
+    billets.forEach((billet) => {
+      travelRequirements.push(parseInt(billet.travelRequirement.split("%")[0]));
+      console.log(travelRequirements);
+    });
+    travelRequirement = Math.max(...travelRequirements);
+  }
 
   return (
     <Paper sx={style}>
@@ -176,10 +187,12 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
             variant="outlined"
             id="email"
             label="Email"
-            sx={{ width: "100%", marginRight: "10px" }}
+            sx={{ width: "100%" }}
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
+        </div>
+        <div className="inputRow">
           <FormControl fullWidth>
             <InputLabel id="demo-select-small">Security Clearance</InputLabel>
 
@@ -204,6 +217,16 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
               ))}
             </Select>
           </FormControl>
+          <TextField
+            variant="outlined"
+            label="Travel Requirement"
+            id="billet"
+            sx={{ width: "100%", marginLeft: "10px" }}
+            value={`${travelRequirement}%`}
+            InputProps={{
+              readOnly: true,
+            }}
+          />
         </div>
         {billets.length !== 0 && <h1 className="header">Attached Billets</h1>}
         <div className="inputRow-billets">
