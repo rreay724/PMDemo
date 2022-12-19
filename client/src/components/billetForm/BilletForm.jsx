@@ -58,7 +58,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
     };
 
     getPersons();
-  });
+  }, []);
 
   const handleRemovePerson = async (e) => {
     e.preventDefault();
@@ -72,6 +72,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     let newBillet = {};
     if (person) {
       newBillet = {
@@ -125,6 +126,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
             sx={{ width: "100%" }}
             onChange={(e) => setBilletNumber(e.target.value)}
             value={billetNumber}
+            required={true}
           />
 
           <TextField
@@ -134,11 +136,12 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
             sx={{ width: "100%" }}
             onChange={(e) => setBilletTitle(e.target.value)}
             value={billetTitle}
+            required={true}
           />
         </div>
 
         <div className="inputBilletRow">
-          <FormControl fullWidth>
+          <FormControl fullWidth required={true}>
             <InputLabel id="demo-select-small">Billet Status</InputLabel>
 
             <Select
@@ -262,6 +265,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
             Remove
           </Button>
         </div>
+
         <Button variant="contained" type="submit" sx={{ marginRight: "5px" }}>
           Save
         </Button>

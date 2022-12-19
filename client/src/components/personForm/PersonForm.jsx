@@ -24,12 +24,14 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
 
   // fetch billets where person id equals row.id which is person id
   const fetchBillets = async () => {
-    try {
-      // this equals /billets?person=row.id
-      const res = await axios.get("/billet", { params: { person: row.id } });
-      setBillets(res.data);
-    } catch (error) {
-      console.log(error);
+    if (row.id !== undefined) {
+      try {
+        // this equals /billets?person=row.id
+        const res = await axios.get("/billet", { params: { person: row.id } });
+        setBillets(res.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -95,6 +97,7 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
               sx={{ marginRight: "10px", width: "100%" }}
               onChange={(e) => setFirstName(e.target.value)}
               value={firstName}
+              required={true}
             />
 
             <TextField
@@ -104,6 +107,7 @@ const PersonForm = ({ row, setOpen, fetchPersons }) => {
               sx={{ marginLeft: "10px", width: "100%" }}
               onChange={(e) => setLastName(e.target.value)}
               value={lastName}
+              required={true}
             />
           </div>
         </FormControl>
