@@ -11,21 +11,9 @@ import {
   exemptStatuses,
   clearances,
   billetStatuses,
+  style,
 } from "./values";
 import "./billetForm.css";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "55rem",
-  bgcolor: "#fff !important",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-  textAlign: "center",
-};
 
 const BilletForm = ({ row, setOpen, fetchBillets }) => {
   const [billetNumber, setBilletNumber] = useState("");
