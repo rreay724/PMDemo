@@ -8,3 +8,5 @@ export { default as PersonForm } from "./personForm/PersonForm";
 export { default as BilletForm } from "./billetForm/BilletForm";
 export { default as Dashboard } from "./dashboard/Dashboard";
 export { default as PieChart } from "./pieChart/PieChart";
+export { default as LabCatDataTable } from "./labCatDataTable/LabCatDataTable";
+export { default as LabCatForm } from "./labCatForm/LabCatForm";

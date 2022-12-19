@@ -4,20 +4,20 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import { BilletForm } from "../";
+import { LabCatForm } from "..";
 import Stack from "@mui/material/Stack";
 import LinearProgress from "@mui/material/LinearProgress";
 
-export default function BilletsDataTable() {
+export default function LabCatDataTable() {
   const [row, setRow] = useState({});
-  const [billets, setBillets] = useState([]);
+  const [labCats, setLabCats] = useState([]);
   const [open, setOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
-  const fetchBillets = async () => {
+  const fetchLabCats = async () => {
     try {
-      const res = await axios.get("/billet");
-      setBillets(res.data);
+      const res = await axios.get("/laborCategory");
+      setLabCats(res.data);
       setLoaded(true);
     } catch (error) {
       console.log(error);
@@ -25,7 +25,7 @@ export default function BilletsDataTable() {
   };
 
   useEffect(() => {
-    fetchBillets();
+    fetchLabCats();
   }, []);
 
   const handleClick = (event, cellValues) => {
@@ -67,24 +67,11 @@ export default function BilletsDataTable() {
         );
       },
     },
-    { field: "billetNumber", headerName: "Billet Number", width: 190 },
-    { field: "title", headerName: "Title", width: 190 },
+    { field: "name", headerName: "Labor Category Name", width: 300 },
     {
-      field: "billetStatus",
-      headerName: "Billet Status",
-      width: 190,
-    },
-    {
-      field: "clearanceRequirement",
-      headerName: "Clearance Requirement",
-      sortable: false,
-      width: 200,
-    },
-    { field: "exemptStatus", headerName: "Exempt Status", width: 200 },
-    {
-      field: "travelRequirement",
-      headerName: "Travel Requirement",
-      width: 200,
+      field: "shortName",
+      headerName: "Labor Category Short Name",
+      width: 230,
     },
   ];
 
@@ -96,7 +83,7 @@ export default function BilletsDataTable() {
         </Stack>
       )}
       <DataGrid
-        rows={billets}
+        rows={labCats}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
@@ -111,7 +98,7 @@ export default function BilletsDataTable() {
         sx={{ marginTop: "10px" }}
         onClick={handleOpen}
       >
-        Add Billet
+        Add Labor Category
       </Button>
       <Modal
         open={open}
@@ -120,8 +107,8 @@ export default function BilletsDataTable() {
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <BilletForm
-            fetchBillets={fetchBillets}
+          <LabCatForm
+            fetchLabCats={fetchLabCats}
             row={row}
             setOpen={setOpenFromForm}
           />

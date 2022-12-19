@@ -12,6 +12,11 @@ const BilletSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Person",
     },
+    laborCategory: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "LaborCategory",
+      required: true,
+    },
   },
   { timestamps: true }
 );

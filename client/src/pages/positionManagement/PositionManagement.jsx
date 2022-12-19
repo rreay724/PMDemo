@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   PersonsDataTable,
   BilletsDataTable,
+  LabCatDataTable,
   TableHeader,
   Dashboard,
 } from "../../components";
@@ -44,12 +45,18 @@ const PositionManagement = () => {
               label="Billets"
               onClick={() => setTab("billets")}
             />
+            <Tab
+              value="four"
+              label="Labor Categories"
+              onClick={() => setTab("labCats")}
+            />
           </Tabs>
         </Box>
         <TableHeader />
 
         {tab === "persons" && <PersonsDataTable />}
         {tab === "billets" && <BilletsDataTable />}
+        {tab === "labCats" && <LabCatDataTable />}
         {tab === "dashboard" && <Dashboard />}
       </div>
     </div>

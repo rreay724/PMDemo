@@ -1,0 +1,20 @@
+.header{
+    padding-bottom: 20px;
+    font-family: "Helvetica Neue",sans-serif;
+}
+
+.inputBilletRow{
+    display: grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-top:15px;
+    margin-bottom:15px;
+
+}
+
+.inputRow-person{
+    display: flex;
+    margin-bottom:10px;
+    margin-top:10px;
+    align-items:center;
+}
