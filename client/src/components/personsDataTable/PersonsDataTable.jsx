@@ -72,7 +72,6 @@ export default function PersonsDataTable() {
 
   useEffect(() => {
     fetchPersons();
-    console.log(persons);
   }, []);
 
   const handleOpen = () => {
