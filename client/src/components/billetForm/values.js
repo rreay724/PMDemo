@@ -23,3 +23,16 @@ export const clearances = [
 ];
 export const billetStatuses = ["Vacant", "On-hold", "Cancelled", "Filled"];
 export const exemptStatuses = ["Exempt", "Non-Exempt"];
+
+export const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "55rem",
+  bgcolor: "#fff !important",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+  textAlign: "center",
+};

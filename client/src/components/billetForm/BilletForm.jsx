@@ -11,21 +11,9 @@ import {
   exemptStatuses,
   clearances,
   billetStatuses,
+  style,
 } from "./values";
 import "./billetForm.css";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "55rem",
-  bgcolor: "#fff !important",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-  textAlign: "center",
-};
 
 const BilletForm = ({ row, setOpen, fetchBillets }) => {
   const [billetNumber, setBilletNumber] = useState("");
@@ -58,7 +46,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
     };
 
     getPersons();
-  });
+  }, []);
 
   const handleRemovePerson = async (e) => {
     e.preventDefault();
@@ -72,6 +60,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     let newBillet = {};
     if (person) {
       newBillet = {
@@ -125,6 +114,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
             sx={{ width: "100%" }}
             onChange={(e) => setBilletNumber(e.target.value)}
             value={billetNumber}
+            required={true}
           />
 
           <TextField
@@ -134,11 +124,12 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
             sx={{ width: "100%" }}
             onChange={(e) => setBilletTitle(e.target.value)}
             value={billetTitle}
+            required={true}
           />
         </div>
 
         <div className="inputBilletRow">
-          <FormControl fullWidth>
+          <FormControl fullWidth required={true}>
             <InputLabel id="demo-select-small">Billet Status</InputLabel>
 
             <Select
@@ -262,6 +253,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
             Remove
           </Button>
         </div>
+
         <Button variant="contained" type="submit" sx={{ marginRight: "5px" }}>
           Save
         </Button>
