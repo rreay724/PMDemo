@@ -40,7 +40,7 @@ export default function PersonsDataTable() {
     {
       field: "email",
       headerName: "Email",
-      width: 190,
+      width: 220,
     },
     {
       field: "phone",
