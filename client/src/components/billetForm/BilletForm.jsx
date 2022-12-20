@@ -24,6 +24,8 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
   const [clearanceRequirement, setClearanceRequirement] = useState("");
   const [persons, setPersons] = useState([]);
   const [person, setPerson] = useState("");
+  const [labCats, setLabCats] = useState([]);
+  const [labCat, setLabCat] = useState("");
 
   useEffect(() => {
     if (Object.keys(row).length !== 0) {
@@ -33,6 +35,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
       setExemptStatus(row.exemptStatus);
       setTravelRequirement(row.travelRequirement);
       setClearanceRequirement(row.clearanceRequirement);
+      setLabCat(row.laborCategory);
       if (row.person) {
         setPerson(row.person);
       }
@@ -41,11 +44,26 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
 
   useEffect(() => {
     const getPersons = async () => {
-      const res = await axios.get("/person");
-      setPersons(res.data);
+      try {
+        const res = await axios.get("/person");
+        setPersons(res.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
-
     getPersons();
+  }, []);
+
+  useEffect(() => {
+    const getLabCats = async () => {
+      try {
+        const res = await axios.get("/laborCategory");
+        setLabCats(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getLabCats();
   }, []);
 
   const handleRemovePerson = async (e) => {
@@ -71,6 +89,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
         travelRequirement,
         clearanceRequirement,
         person,
+        laborCategory: labCat,
       };
     } else {
       newBillet = {
@@ -80,6 +99,7 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
         exemptStatus,
         travelRequirement,
         clearanceRequirement,
+        laborCategory: labCat,
       };
     }
 
@@ -214,6 +234,33 @@ const BilletForm = ({ row, setOpen, fetchBillets }) => {
               {travelRequirements.map((travel) => (
                 <MenuItem sx={{ bgcolor: "#fff" }} value={travel} key={travel}>
                   {travel}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        <div className="inputBilletRow">
+          <FormControl fullWidth required={true}>
+            <InputLabel id="demo-select-small">Labor Category</InputLabel>
+
+            <Select
+              value={labCat}
+              defaultValue={labCat}
+              label="Labor Category"
+              sx={{
+                width: "100%",
+                color: "black !important",
+                textAlign: "left",
+              }}
+              onChange={(e) => setLabCat(e.target.value)}
+            >
+              {labCats.map((labCat) => (
+                <MenuItem
+                  sx={{ bgcolor: "#fff" }}
+                  value={labCat.id}
+                  key={labCat.id}
+                >
+                  {labCat.name}
                 </MenuItem>
               ))}
             </Select>

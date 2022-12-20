@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const personsRoute = require("./routes/persons");
 const billetsRoute = require("./routes/billets");
+const laborCategoryRoute = require("./routes/laborCategory");
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ mongoose
 
 app.use("/api/person", personsRoute);
 app.use("/api/billet", billetsRoute);
+app.use("/api/laborCategory", laborCategoryRoute);
 
 app.listen("4000", () => {
   console.log("Server is running on port 4000");

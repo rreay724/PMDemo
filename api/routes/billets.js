@@ -11,6 +11,7 @@ router.post("/", async (req, res) => {
       travelRequirement: req.body.travelRequirement,
       clearanceRequirement: req.body.clearanceRequirement,
       person: req.body.person,
+      laborCategory: req.body.laborCategory,
     });
 
     const billet = await newBillet.save();
